@@ -1,7 +1,7 @@
 from turtle import Turtle,Screen
 import random
 import time
-import snake
+from snake import Snake
 import food
 from scoreboard import Scoreboard
 
@@ -13,7 +13,7 @@ screen.bgcolor("black")
 screen.title("My Snake Game")
 food = food.Food()
 
-snake = snake.Snake()
+snake = Snake()
 screen.listen()
 screen.onkey(snake.up,"Up")
 screen.onkey(snake.down,"Down")
@@ -37,15 +37,17 @@ while is_on:
         score.increase_score()
 
     if snake.head.xcor()>340 or snake.head.xcor()<-340 or snake.head.ycor()>280 or snake.head.ycor()<-280:
-        t.color("white")
-        t.write("Game  Over",align='center',font=('courier',28,'normal'))
+        score.reset()
+        # t.color("white")
+        # t.write("Game  Over",align='center',font=('courier',28,'normal'))
 
-        is_on = False
+        snake.reset()
     for i in snake.new_turtle[1:]:
         if snake.head.distance(i) < 10:
-            is_on = False
-            t.color("white")
-            t.write("Game  Over", align='center', font=('courier', 28, 'normal'))
+            score.reset()
+            # is_on = False
+            # t.color("white")
+            # t.write("Game  Over", align='center', font=('courier', 28, 'normal'))
 
 
 screen.exitonclick()
